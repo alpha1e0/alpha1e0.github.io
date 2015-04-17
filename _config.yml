@@ -1,8 +1,9 @@
 # Site settings
-title: Git site of alpha1e0
+name: alpha1e0
+title: "alpha1e0's blog"
 email: yan.shifm@foxmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  alpha1e0. hacking for fun. hacking for future.
+  hacking for fun
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://alpha1e0.github.io" # the base hostname & protocol for your site
 # twitter_username: jekyllrb
