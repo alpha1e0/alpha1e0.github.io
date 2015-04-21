@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-### We must know, we will know.
+#### 安全研究员，致力于黑客技术、WEB安全方面的研究。
 
 [Contact: {{ site.email }}](mailto:{{ site.email }})
 
