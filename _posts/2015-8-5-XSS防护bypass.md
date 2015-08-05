@@ -146,10 +146,10 @@ HTML标签的几个重要位置如下：
 
 **各个位置的变换方法如下：**
 
-1. **位置1**的变换
+#### **位置1**的变换
 
 
-2. **位置2**的变换
+#### **位置2**的变换
 
 > 插入%00截断，仅在IE中有效
 
@@ -158,36 +158,36 @@ HTML标签的几个重要位置如下：
 > 大小写变换
 > URL编码
 
-3. **位置3**的变换
+#### **位置3**的变换
 
 > '/'符号可以充当分割符
 > '/somewords/'可以充当分隔符
 > 空格可使用0x09 0x0a 0x0c 0x0d替换，firefox可用
 > URL编码
 
-4. **位置4**的变换
+#### **位置4**的变换
 
 > 大小写变换
 > URL编码
 
-5. **位置5**的变换
+#### **位置5**的变换
 
 > 可插入空格
 > 可插入0x09 0x0a 0x0c 0x0d，firefox可用
 
-6. **位置6**的变换
+#### **位置6**的变换
 
 > 单引号，双引号
 > 在ie中可使用反引号代替
 > 如果没有空格则不需要引号
 > URL编码
 
-7. **位置7**的变换
+#### **位置7**的变换
 
 > 可插入空格
 > 可插入0x09 0x0a 0x0c 0x0d，firefox有效
 
-8. **位置8**的变换
+#### **位置8**的变换
 
 > HTML编码，HTML实体编码可以方式**&#111**或**&#x6c**，分别是十进制方式和十六进制方式
 
@@ -201,14 +201,14 @@ HTML标签的几个重要位置如下：
 > 如果是javascript执行域（如伪协议中），则可以使用javascript相关编码
 
 
-9. **位置9**的变换
+#### **位置9**的变换
 
 > 空格符
 > 0x09 0x0a 0x0c 0x0d可从当分割符，firefox可用
 > 如果前面的属性有分号封闭，则无需空格
 > URL编码
 
-10. 其他
+#### 其他
 
 > 使用%3Cscript%3E**String.fromCharCode**%3C%2fscript%3E
 
@@ -338,8 +338,8 @@ HTML组件：
 [html编码][4]
 [html sec][5]
 
-[1]. http://www.ruanyifeng.com/blog/2010/02/url_encoding.html
-[2]. http://www.freebuf.com/articles/web/20282.html
-[3]. http://drops.wooyun.org/tips/845
-[4]. http://drops.wooyun.org/tips/147
-[5]. http://html5sec.org/
+[1]: http://www.ruanyifeng.com/blog/2010/02/url_encoding.html
+[2]: http://www.freebuf.com/articles/web/20282.html
+[3]: http://drops.wooyun.org/tips/845
+[4]: http://drops.wooyun.org/tips/147
+[5]: http://html5sec.org/
