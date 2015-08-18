@@ -10,6 +10,40 @@ tages: 安全技术
 
 XSS攻击和场景相关性非常大，且难以防御，本文介绍XSS攻击bypass相关的内容。
 
+三种XSS攻击整个过程中攻击payload编解码流程简图如下：
+
+反射式XSS：
+
+	编码过的payload  -------->  web服务器解码  -------->  CGI脚本解码  -------->  web应用解码  -------->  浏览器解码
+	包含payload的请求           IIS/Apache/Tomcat        php/java/asp.net            xxx系统             IE/Chrome/Firefox
+				 	  硬件WAF					 软件WAF												  浏览器安全机制
+
+存储式XSS：
+
+	编码过的payload  -------->  web服务器解码  -------->  CGI脚本解码  -------->  web应用解码  -------->  存储解码
+	包含payload的请求           IIS/Apache/Tomcat        php/java/asp.net            xxx系统              数据库、xml文件
+					  硬件WAF					软件WAF
+
+	恶意页面HTTP请求  -------->  web服务器编码  -------->  浏览器解码
+	包含payload的请求           IIS/Apache/Tomcat       IE/Chrome/Firefox
+														  浏览器安全机制
+
+DOM XSS；
+
+	编码过的payload  -------->  浏览器解码  -------->  本地JS脚本解码
+	包含payload的请求		IIS/Apache/Tomcat	
+						   
+
+由此可见，一个理想的、完美的WAF产品必须考虑所有环节的编解码，而这是几乎不可能实现的，不同类型服务器、CGI脚本、浏览器，且同种不同版本之间也会有差异
+
+一个简单的例子：web应用采用了某种自定义的加密方法，那么WAF是不可能防护的
+
+只要具体问题具体分析，WAF是很容易被绕过的
+
+最完美的防御体系必然是：Defence in Depth。深度防御，对每个环节做好防护
+
+本文主要介绍反射式XSS的bypass手段，主要关注Firefox及IE浏览器（IE浏览器可能需要关闭XSS防护机制）
+
 ---
 
 ## 2 XSS payload出现的位置
