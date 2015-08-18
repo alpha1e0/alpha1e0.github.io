@@ -15,8 +15,8 @@ XSS攻击和场景相关性非常大，且难以防御，本文介绍XSS攻击by
 反射式XSS：
 
 	编码过的payload  -------->  web服务器解码  -------->  CGI脚本解码  -------->  web应用解码  -------->  浏览器解码
-	包含payload的请求         IIS/Apache/Tomcat        php/java/asp.net            xxx系统           IE/Chrome/Firefox
-				 	  硬件WAF					 软件WAF												浏览器安全机制
+	包含payload的请求         IIS/Apache/Tomcat        php/java/asp.net            xxx系统          IE/Chrome/Firefox
+				 	  硬件WAF					 软件WAF											浏览器安全机制
 
 存储式XSS：
 
