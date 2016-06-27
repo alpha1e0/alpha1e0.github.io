@@ -1,15 +1,12 @@
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
-            <p class="copyright">&copy;{{ site.time | date: '%Y' }} {{ site.name }}. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
-            under
-            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
-        </div>
-    </div>
+<div class="disclaimer">
+  {% if site.data.theme.show_disclaimer %}
+  <p>
+    The postings on this site are my own and don't necessarily represent my 
+    employer’s positions, strategies or opinions.
+  </p>
+  {% endif %}
+
+  <p>
+    © {{ site.data.theme.name }}, 2014 &mdash; <b>Contact </b> <a href="mailto:{{ site.data.theme.email }}">me</a>
+  </p>
 </div>
-
-{% include disqus-counts.html %}
-{% include analytics.html %}
-
-</body>
-</html>
