@@ -1,6 +1,7 @@
 # General Jekyll Config
+
 #highlighter: pygments
 highlighter: rouge
-url: http://example.com
+url: http://alpha1e0.github.io
 lsi: false
 exclude: [LICENSE, CNAME, README.md, .gitignore, Gemfile, Gemfile.lock]
