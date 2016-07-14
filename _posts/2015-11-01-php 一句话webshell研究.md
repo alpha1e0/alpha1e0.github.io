@@ -66,7 +66,7 @@ PHP服务器一直是一句话webshell攻击的重灾区，**经典的PHP一句�
 
 url编码后发送到目标主机即可执行，结果如下图所示：
 
-![一句话执行phpinfo()](ziliao\1.jpg "一句话执行phpinfo()")
+![一句话执行phpinfo()](/images/webshell_1.jpg "一句话执行phpinfo()")
 
 需要注意的是，一句话webshell可以插入到很多正常的php文件中来隐藏自己
 
@@ -80,7 +80,7 @@ url编码后发送到目标主机即可执行，结果如下图所示：
 
 中国菜刀的界面如下：
 
-![中国菜刀](ziliao\2.jpg "中国菜刀")
+![中国菜刀](/images/webshell_2.jpg "中国菜刀")
 
 这里以“查看目录”功能为例分析中国菜刀的工作原理
 
