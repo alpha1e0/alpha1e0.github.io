@@ -1,11 +1,13 @@
 ---
-layout: post
 title: "sql注入bypass"
-author: alpha1e0
 categories: 渗透测试
 tags: 渗透测试
+toc: true
+toc_label: 目录
+toc_icon: "cog"
 ---
 
+> 本文介绍sql注入bypass的一些技巧
 
 ## 1 SQL注入过程中的处理
 

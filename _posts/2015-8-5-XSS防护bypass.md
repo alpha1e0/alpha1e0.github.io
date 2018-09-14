@@ -1,10 +1,13 @@
 ---
-layout: post
 title: XSS防护bypass
-author: alpha1e0
-categories: 安全技术
-tages: 安全技术
+categories: 安全研究
+tages: 安全研究
+toc: true
+toc_label: 目录
+toc_icon: "cog"
 ---
+
+> 本文介绍xss漏洞bypass的一些技巧
 
 ## 1 前言
 

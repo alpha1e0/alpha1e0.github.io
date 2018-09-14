@@ -1,0 +1,10 @@
+# main links
+main:
+  - title: "首页"
+    url: /
+  - title: "所有文章"
+    url: /year-archive/
+  - title: "标签分类"
+    url: /tags/
+  - title: "关于"
+    url: /about/
