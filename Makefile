@@ -1,7 +1,7 @@
-# Makefile for Sphinx documentation
+# Makefile for build blog
 #
 
-# You can set these variables from the command line.
+# variables setting
 BUILDDIR    = _site
 SERVERTOOL  = /Users/apple/bin/alivm
 
@@ -9,15 +9,9 @@ SERVERTOOL  = /Users/apple/bin/alivm
 preview:
 	bundle exec jekyll serve
 
+
 .PHONY: server
 server:
-	bundle exec jekyll build
-	@echo
-	@echo "Build finished. Upload to server."
-	cd $(BUILDDIR) && $(SERVERTOOL) put . /webdata
-
-.PHONY: server2
-server2:
 	bundle exec jekyll build
 	@echo
 	@echo "Build finished. Upload to server."
@@ -42,4 +36,14 @@ server2:
 	cd $(BUILDDIR) && $(SERVERTOOL) put index.html /webdata
 	cd $(BUILDDIR) && $(SERVERTOOL) put sitemap.xml /webdata
 	cd $(BUILDDIR) && $(SERVERTOOL) put atom.xml /webdata
+
+
+.PHONY: server2
+server2:
+	bundle exec jekyll build
+	@echo
+	@echo "Build finished. Upload to server."
+	cd $(BUILDDIR) && $(SERVERTOOL) put . /webdata
+
+
 
